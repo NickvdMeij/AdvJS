@@ -1,0 +1,32 @@
+<div class="col-md-12" ng-init="initCreate()">
+	<h2>Create a new game!</h2>
+	<div ng-show="createError" class="alert alert-danger">
+		<b>Invalid game!</b>
+		<ul>
+			<li ng-show="createError.minPlayers">The minimum amount of players needs to be at least 0</li>
+			<li ng-show="createError.maxPlayers">The maximum amount of players needs to be at least the size of the minimum amount of players</li>
+			<li ng-show="createError.template">A game template needs to be selected</li>
+			<li ng-show="createError.user">You need to be logged in to create a new game!</li>
+		</ul>
+	</div>
+	<form ng-submit="createGame()">
+		<div class="form-group">
+			<input type="number" ng-model="newGame.minPlayers" class="form-control" placeholder="Minimum Players">
+		</div>
+
+		<div class="form-group">
+			<input type="number" ng-model="newGame.maxPlayers" class="form-control" placeholder="Maximum Players">
+		</div>
+
+		<div class="form-group">
+		    <select class="form-control" ng-model="newGame.templateName" placeholder="Template">
+		    	<option value="" selected>Select Game Template</option>
+		    	<option ng-repeat="gameTemplate in gameTemplates">{{gameTemplate.id}}</option>
+		    </select>
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-success pull-right">Save</button>
+		</div>
+	</form>
+</div>

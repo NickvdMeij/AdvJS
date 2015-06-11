@@ -1,0 +1,33 @@
+<div ng-init="init()">
+	<div class="col-md-9">
+		<h2>Games <small>Join, watch, play!</small></h2>
+		<form ng-submit="applyFilters()">
+			  <div class="form-group">
+			    <input type="text" class="form-control" ng-model="query.createdBy" placeholder="Creator Email">
+			  </div>
+			  <div class="form-group">
+			    <input type="text" class="form-control" ng-model="query.player" placeholder="Player Email">
+			  </div>
+			  <div class="form-group">
+			    <select class="form-control" ng-model="query.gameTemplate" placeholder="Template">
+			    	<option value="" selected>Select Game Template</option>
+			    	<option ng-repeat="gameTemplate in gameTemplates">{{gameTemplate.id}}</option>
+			    </select>
+			  </div>
+			  <div class="form-group">
+			    <select class="form-control" ng-model="query.state" placeholder="State">
+			    	<option ng-repeat="state in states" value="{{state.value}}">{{state.name}}</option>
+			    </select>
+			  </div>
+			  <button type="submit" class="btn btn-success pull-right">Submit</button>
+		</form>
+	</div>
+	<div class="col-md-3">
+		<div class="btn-group btn-group-justified">
+			<a href="#/games/create" ng-disabled="!currentUser" class="btn btn-primary">Create a new Game</a>
+		</div>
+	</div>
+	<div class="col-md-4" ng-repeat="row in getRows()" style="padding-top: 10px">
+		<game-snippet ng-repeat="game in games|orderBy: '-createdOn'" ng-show="$index % numOfRows == row"></game-snippet>
+	</div>
+</div>

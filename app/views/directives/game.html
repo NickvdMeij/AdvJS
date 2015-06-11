@@ -1,0 +1,22 @@
+<div class="panel" ng-class="getPanelClass(game.state)">
+	<div class="panel-heading" style="block: inline">
+		<h4><a ng-href="#/games/{{game._id}}">{{game.createdBy.name}}'s Game</a></h4>
+	</div>
+	<div class="panel-body">
+		<div class="pull-right">
+			<p><b>{{game.gameTemplate.id}}</b></p>
+			<p><b>{{game.players.length}} / {{game.maxPlayers}}</b></p>
+		</div>
+		<div>
+			<p><b>Created at: {{game.createdOn|date: 'dd-MM-yyyy H:mm:ss'}}</b></p>
+			<p><b>Players:</b></p>
+			<ul>
+				<li ng-repeat="player in game.players">{{player.name}}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="panel-footer">
+		<a class="btn btn-primary">Details</a>
+		<button class="btn pull-right" ng-class="getButtonClass(game.state)" ng-show="joinable(game)" ng-click="joinGame(game)">Join</button>
+	</div>
+</div>
